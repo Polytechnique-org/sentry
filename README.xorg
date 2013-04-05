@@ -1,0 +1,18 @@
+Sentry
+======
+
+
+This folder holds the whole setup for our `Sentry`_.
+
+Layout
+------
+
+Since modern development hipsters don't bother providing proper packages for Debian, we'll have to handle it by hand:
+- A virtualenv is setup in ``/home/web/sentry/venv/``
+- It contains all dependencies
+- The X.org setup lives in ``xorg_sentry/``
+
+
+.. _Sentry: http://sentry.readthedocs.org/
+
+.. vim:set ft=rst:
