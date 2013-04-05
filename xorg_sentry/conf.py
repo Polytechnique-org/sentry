@@ -9,10 +9,6 @@ from sentry.conf.server import *
 EXCLUDED_APPS = ('djcelery', 'kombu.transport.django', 'social_auth', 'django_social_auth_trello')
 INSTALLED_APPS = tuple(app for app in INSTALLED_APPS if app not in EXCLUDED_APPS)
 
-AUTHENTICATION_BACKENDS = (
-    'sentry.utils.auth.EmailAuthBackend',
-)
-
 TEMPLATE_CONTEXT_PROCESSORS = tuple(
     tcp for tcp in TEMPLATE_CONTEXT_PROCESSORS if 'social_auth' not in tcp)
 
@@ -26,11 +22,16 @@ CONF_ROOT = os.path.dirname(__file__)
 
 def get_password(filename):
     with open(os.path.join(CONF_ROOT, 'private', filename)) as f:
-        return f.readline()
+        return f.readline().strip()
 
 
 # Actual configuration
 # ====================
+
+AUTHENTICATION_BACKENDS = (
+    #'sentry.utils.auth.EmailAuthBackend',
+    'django_authgroupex.auth.AuthGroupeXBackend',
+)
 
 DATABASES = {
     'default': {
@@ -45,6 +46,13 @@ DATABASES = {
         'PORT': '',
     }
 }
+
+INSTALLED_APPS = (
+    'django_authgroupex',
+    'xorg_sentry',
+) + INSTALLED_APPS
+
+ROOT_URLCONF = 'xorg_sentry.urls'
 
 SENTRY_KEY = get_password('secret_key')
 
@@ -76,3 +84,9 @@ EMAIL_HOST_USER = ''
 EMAIL_PORT = 25
 EMAIL_USE_TLS = False
 
+
+AUTHGROUPEX_KEY = get_password('authgroupex_key')
+AUTHGROUPEX_SUPERADMIN_PERMS = ('admin',)
+AUTHGROUPEX_STAFF_PERMS = ('admin',)
+AUTHGROUPEX_RETURN_URL = 'https://errors.polytechnique.org/xorgauth/'
+AUTHGROUPEX_FIELDS = ('username', 'firstname', 'lastname', 'perms')

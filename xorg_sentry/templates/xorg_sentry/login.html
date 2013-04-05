@@ -1,0 +1,18 @@
+{% extends "sentry/layout.html" %}
+{% load i18n %}
+{% load url from future %}
+{% block title %}{% trans "Login" %} | {{ block.super }}{% endblock %}
+
+{% block main %}
+    <section class="body">
+       {% if next %}
+            <p class="alert alert-info">{% trans "Please login to continue." %}</p>
+        {% endif %}
+
+        <div class="row">
+            <div class="span6">
+                <a class="btn btn-primary" href="{% url 'authgroupex:login' %}">Connexion via X.org</a>
+            </div>
+        </div>
+    </section>
+{% endblock %}

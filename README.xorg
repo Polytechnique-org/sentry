@@ -12,6 +12,17 @@ Since modern development hipsters don't bother providing proper packages for Deb
 - It contains all dependencies
 - The X.org setup lives in ``xorg_sentry/``
 
+Dependencies
+------------
+
+Dependencies are listed in the ``requirements.txt`` file.
+Install them with::
+
+    pip install -r requirements.txt
+
+Under Debian, you should use the following packages:
+- python-dev
+
 
 .. _Sentry: http://sentry.readthedocs.org/
 

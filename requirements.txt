@@ -1,1 +1,2 @@
 sentry
+django_authgroupex
