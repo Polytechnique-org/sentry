@@ -1,4 +1,5 @@
 *.py[co]
 .*.swp
 
+xorg_sentry/private/
 venv/
